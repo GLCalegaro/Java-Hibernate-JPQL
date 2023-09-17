@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<!--	A opção pela JTA seria mais adequada para quando estamos utilizando
+	um-->
+	<!--	servidor de aplicação, quando vai trabalhar com EJB, JMS ou outras-->
+	<!--	tecnologias do Java EE, e o servidor se encarrega de cuidar da
+	transação.-->
+	<!--	Como, no nosso caso, se trata de uma aplicação stand-alone, sem
+	servidor de-->
+	<!--	aplicação, então será "RESOURCE_LOCAL". Nós que gerenciaremos a
+	transação.-->
+	<!--	Depois veremos com calma essa parte de transação.-->
+	<persistence-unit name="loja" transaction-type="RESOURCE_LOCAL"> 
+<!--		Existem algumas propriedades que são obrigatórias, que precisamos informar para-->
+<!--		a JPA. Essas propriedades são específicas da JPA, então, elas têm um-->
+<!--		nome específico. Colocamos "javax.persistence. e a configuração queremos-->
+<!--		fazer. Se quisermos configurar, por exemplo, o driver do banco de dados,-->
+<!--		então, se estamos utilizando o H2, precisamos dizer para a JPA qual a-->
+<!--		classe do driver do H2. No value, passaremos qual a classe do driver do-->
+<!--		JDBC. No caso do H2, é "org.h2.Driver". Esse driver mudará de acordo com-->
+<!--		o banco de dados que quisermos utilizar. Se fosse o MySQL, seria-->
+<!--		com.mysql.. Se fosse PostgreSQL, org.postgresql.. Ou seja, varia de-->
+<!--		acordo com o banco de dados.-->
+		 <properties>
+			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:loja" />
+			<property name="javax.persistence.jdbc.user" value="sa" />
+			<property name="javax.persistence.jdbc.password" value="" />
+			
+			<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
+			<property name="hibernate.show_sql" value="true"/>
+			<property name="hibernate.format_sql" value="true"/>
+			<property name="hibernate.hbm2ddl.auto" value="update"/>
+		</properties>
+	</persistence-unit>
+
+</persistence>
